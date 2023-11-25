@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" data-tauri-drag-region>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/index.css" />
+    <title>Document</title>
+</head>
+
+<body>
+    <img id="left_bar" type="module" src="/svg/asset2.svg" width="70">
+    <img id="logo" type="module" src="/svg/logo.svg" width="35">
+    
+    <img onclick="dot1Click()" id="dot1" type="module" src="/svg/dot.svg" width="24">
+    <img onclick="dot2Click()" id="dot2" type="module" src="/svg/dot.svg" width="24">
+    <img onclick="screwClick()" id="screw" type="module" src="/svg/screw.svg" width="26">
+    
+    <button onclick="updateNetr()" id="ubtn_n" type="module">update</button> 
+    <button onclick="updateLitlcow()" id="ubtn_l" type="module">update</button> 
+
+    <button onclick="downloadNetr()" id="dbtn_n" type="module">!err:dbtn_n</button> 
+    <button onclick="downloadLitlcow()" id="dbtn_l" type="module">!err:dbtn_l</button> 
+</body>
+
+<div class="inner_container" id="kokot">
+    <button id="dev_tag">early prototype</button>
+    <h1 id="game_title"></h1>
+    <h2 id="game_text1">! error with javascript</h2>
+    <h2></h2>
+    <h2 id="game_text2"></h2>
+    <h2></h2>
+    <h2 id="game_text3"></h2>
+</div>
+<div class="footer">
+    <h2 id="footer_info"></h2>
+</div>
+<button onclick="retry()" id="btn_retry">retry</button>
+
+
+<div class="overlay" id="kokot2" onclick="screwCloseClick()">
+    <div class="screw_window" id="kokot3">
+        <h1>settings</h1>
+        <h1></h1>
+        <h2>startup sound:</h2><button id="btn_mute" onclick="muteSwitch()">mute</button>
+        <h1></h1>
+        <h2>set theme:</h2>
+        <button onclick="flashbangClick()">flashbang</button>
+        <button onclick="darknessClick()">darkness</button>
+        <h1></h1>
+        <h2>check for updates</h2>
+        <button id="retrybtn" onclick="retry()">restart</button>
+    </div>
+</div>
+
+<div class="overlay" id="error_overlay" onclick="errClose()">
+    <div class="error_window" id="error_window">
+        <h1 id="e1">No permission to delete your game.</h2>
+        <h2 id="e2">Go to: > HOME folder > Applications</h2>
+        <h2 id="e3"></h2>
+        <h2 id="e4">Here you can delete whatever you want.</h2>
+    </div>
+</div>
+
+<script src="/main.js"></script>
+</html> 

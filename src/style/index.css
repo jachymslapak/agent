@@ -1,0 +1,450 @@
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url("public/style/SpaceGrotesk-VariableFont_wght.ttf");
+}
+
+:root {
+  font-family: 'Space Grotesk';
+  pointer-events: none;
+
+  --background-color: #000000;
+  --border-color: #ffffff;
+  --color: #ffffff;
+  
+  /*INSTALL NETR BUTTON*/
+  --i_n-btn-background-color: #000000;
+  --i_n-btn-border-color: #ffffff;
+  --i_n-btn-color: #ffffff;
+  --i_n-btn-cursor: pointer;
+  /*INSTALL LITLCOW BUTTON*/
+  --i_l-btn-background-color: #000000;
+  --i_l-btn-border-color: #ffffff;
+  --i_l-btn-color: #ffffff;
+  --i_l-btn-cursor: pointer;
+  /*UPDATE NETR BUTTON*/
+  --u_n-btn-background-color: #000000;
+  --u_n-btn-border-color: #ffffff;
+  --u_n-btn-color: #ffffff;
+  --u_n-btn-cursor: pointer;
+  /*UPDATE LITLCOW BUTTON*/
+  --u_l-btn-background-color: #000000;
+  --u_l-btn-border-color: #ffffff;
+  --u_l-btn-color: #ffffff;
+  --u_l-btn-cursor: pointer;
+  /*RETRY BUTTON*/
+  --r-btn-background-color: #000000;
+  --r-btn-border-color: #ffffff;
+  --r-btn-color: #ffffff;
+  --r-btn-cursor: pointer;
+
+  --btn-background-color: #000000;
+  --btn-border-color: #ffffff;
+  --btn-color: #ffffff;
+
+  --btn-background-color: #000000;
+  --btn-border-color: #ffffff;
+  --btn-color: #ffffff;
+
+  background-color: var(--background-color);
+  border-color: var(--border-color);
+  color: var(--color);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  transition: 1s;
+  overflow: hidden;
+}
+
+button {
+  font-family: 'Space Grotesk';
+  font-size: 11px;
+  pointer-events: all;
+  background-color: var(--btn-background-color);
+  color: var(--btn-color);
+  border-color: var(--btn-border-color);
+  cursor: pointer;
+  border-style: solid;
+  border-radius: 10px;
+  padding: 7px;
+  border-width: thin;
+  text-align: center;
+}
+
+#dev_tag {
+  background-color: var(--btn-background-color);
+  color: var(--btn-color);
+  border-color: var(--btn-border-color);
+  cursor: var(--btn-cursor);
+
+  border-style: none;
+  position: absolute;
+  margin: auto;
+  padding: 5px;
+  top: 3.7%;
+  left: 60%;
+  right: 0;
+  text-align: center;
+  width: 100px;
+  animation: darkenn 1000ms;
+}
+
+#dbtn_n {
+  pointer-events: all;
+  background-color: var(--i_n-btn-background-color);
+  color: var(--i_n-btn-color);
+  border-color: var(--i_n-btn-border-color);
+  cursor: var(--i_n-btn-cursor);
+
+  position: absolute;
+  margin: auto;
+  top: 70%;
+  left: 75px;
+  right: 0;
+  text-align: center;
+  width: 70px;
+  animation: darkenn 1000ms;
+}
+
+#dbtn_l {
+  pointer-events: all;
+  background-color: var(--i_l-btn-background-color);
+  color: var(--i_l-btn-color);
+  border-color: var(--i_l-btn-border-color);
+  cursor: var(--i_l-btn-cursor);
+
+  position: absolute;
+  margin: auto;
+  top: 70%;
+  left: 75px;
+  right: 0;
+  text-align: center;
+  width: 70px;
+  animation: darkenn 1000ms;
+}
+
+#ubtn_n {
+  pointer-events: all;
+  background-color: var(--u_n-btn-background-color);
+  color: var(--u_n-btn-color);
+  border-color: var(--u_n-btn-border-color);
+  cursor: var(--u_n-btn-cursor);
+
+  position: absolute;
+  margin: auto;
+  top: 63%;
+  left: 75px;
+  right: 0;
+  text-align: center;
+  width: 70px;
+  animation: darkenn 1000ms;
+}
+
+#ubtn_l {
+  pointer-events: all;
+  background-color: var(--u_l-btn-background-color);
+  color: var(--u_l-btn-color);
+  border-color: var(--u_l-btn-border-color);
+  cursor: var(--u_l-btn-cursor);
+
+  position: absolute;
+  margin: auto;
+  top: 63%;
+  left: 75px;
+  right: 0;
+  text-align: center;
+  width: 70px;
+  animation: darkenn 1000ms;
+}
+
+#rbtn_n {
+  pointer-events: all;
+  background-color: var(--btn-background-color);
+  color: var(--btn-color);
+  border-color: var(--btn-border-color);
+  cursor: var(--btn-cursor);
+
+  position: absolute;
+  margin: auto;
+  top: 80%;
+  left: 75px;
+  right: 0;
+  text-align: center;
+  width: 70px;
+  animation: darkenn 1000ms;
+}
+
+#rbtn_l {
+  pointer-events: all;
+  background-color: var(--i-btn-background-color);
+  color: var(--i-btn-color);
+  border-color: var(--i-btn-border-color);
+  cursor: var(--i-btn-cursor);
+
+  position: absolute;
+  margin: auto;
+  top: 70%;
+  left: 75px;
+  right: 0;
+  text-align: center;
+  width: 70px;
+  animation: darkenn 1000ms;
+}
+
+#retrybtn {
+  pointer-events: all;
+  background-color: var(--r-btn-background-color);
+  color: var(--r-btn-color);
+  border-color: var(--r-btn-border-color);
+  cursor: var(--r-btn-cursor);
+}
+/* SPLASH SCREEN */
+
+#splash {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 50px;
+}
+/* MAIN */
+
+h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px;
+  font-weight: lighter;
+}
+
+#leftalign {
+  text-align: left;
+}
+
+.footer {
+  position: absolute;
+  top: 84%;
+  left: 75px;
+  right: 0;
+  bottom: 0;
+  margin: 10px;
+  text-align: center;
+  animation: none;
+}
+
+#btn_retry {
+  pointer-events: all;
+  position: absolute;
+  top: 93%;
+  width: 50px;
+  height: 20px;
+  margin: auto;
+  left: 75px;
+  right: 0;
+  top: 90%;
+  bottom: 0;
+  text-align: center;
+  cursor: pointer;
+  animation: none;
+  padding-top: 2px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  visibility: visible;
+}
+
+.inner_container {
+  position: absolute;
+  top: 20px;
+  left: 75px;
+  right: 0;
+  bottom: 0;
+  margin: 10px;
+  animation: godown 1000ms;
+  animation-fill-mode: forwards;
+}
+
+.inner_container2 {
+  position: absolute;
+  top: 20px;
+  left: 75px;
+  right: 0;
+  bottom: 0;
+  margin: 10px;
+  animation: godown 1000ms;
+  animation-fill-mode: forwards;
+}
+
+.overlay {
+  visibility: hidden;
+}
+
+.overlay_visible {
+  pointer-events: all;
+  background-color: var(--background-color);
+  color: var(--color);
+  visibility: visible;  
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  animation: darkenn 1000ms;
+  animation-fill-mode: forwards;
+}
+
+.overlay_close {
+  pointer-events: all;
+  visibility: visible;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  animation: lightenn 1000ms;
+  animation-fill-mode: forwards;
+}
+
+.screw_window_visible {
+  pointer-events: all;
+  background-color: var(--background-color);
+  color: var(--color);
+  border-color: var(--border-color);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 2rem;
+  margin: auto;
+  width: 300px;
+  height: 400px;
+  border-radius: 10px;
+  border-style: solid;
+  visibility: visible;
+  animation: godown 1000ms;
+  animation-fill-mode: forwards;
+  padding: 10px;
+  text-align: center;
+  border-width: thin;
+}
+
+.error_window_visible {
+  pointer-events: all;
+  background-color: var(--background-color);
+  color: var(--color);
+  border-color: var(--border-color);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 2rem;
+  margin: auto;
+  width: 300px;
+  height: 400px;
+  border-radius: 10px;
+  border-style: solid;
+  visibility: visible;
+  animation: godown 1000ms;
+  animation-fill-mode: forwards;
+  padding: 10px;
+  text-align: left;
+  border-width: thin;
+  line-height: 1.5;
+}
+
+#left_bar {
+  position: absolute;
+  top: 82px;
+  left: 5px;
+  right: 90vh;
+  bottom: 0;
+  margin: auto;
+}
+
+#dot1 {
+  pointer-events: all;
+  position: absolute;
+  top: 0;
+  left: 32px;
+  right: 400px;
+  bottom: 350px;
+  margin: auto;
+  cursor: pointer;
+}
+
+#dot2 {
+  pointer-events: all;
+  position: absolute;
+  top: 0;
+  left: 32px;
+  right: 400px;
+  bottom: 250px;
+  margin: auto;
+  cursor: pointer;
+}
+
+#screw {
+  pointer-events: all;
+  position: absolute;
+  top: 550px;
+  left: 30px;
+  right: 400px;
+  bottom: 0;
+  margin: auto;
+  cursor: pointer;
+}
+
+#logo {
+  position: absolute;
+  top: 0;
+  left: 26px;
+  right: 100%;
+  bottom: 82vh;
+  margin: auto;
+}
+/* ANIMACE */
+
+@keyframes godown {
+  0% {
+    transform: translateY(1.5rem);
+    opacity: 0;
+    animation-timing-function: ease-out;
+  }  
+  100% {
+    transform: translateY(2rem);
+    opacity: 1;
+    animation-timing-function: linear;
+  } 
+}
+
+@keyframes darkenn {
+  0% {
+    opacity: 0;
+    animation-timing-function: ease-out;
+  }  
+  100% {
+    opacity: 1;
+    animation-timing-function: linear;
+  } 
+}
+
+@keyframes lightenn {
+  0% {
+    opacity: 1;
+    animation-timing-function: ease-out;
+  }  
+  100% {
+    opacity: 0;
+    animation-timing-function: linear;
+  } 
+}
