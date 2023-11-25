@@ -16,6 +16,7 @@ Agent uses Tauri framework. It downloads enzete games from web server.
 `npm install`
 
 Now build the app with:
+
 `npm run tauri dev`
 
 # please note:
