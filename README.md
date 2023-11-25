@@ -1,10 +1,8 @@
-# hello!
-> Thanks for visiting agent GitLab page!
-> Hello to all my friends! (only them are propably seeing this)
+# what is it?
+Agent is app which downloads enzete games and installs them to your computer.
+Works on Mac, Linux, Windows.
 
-
-# what is agent?
-Agent is client for downloading enzete games.
+You can download binaries here: https://agent.enzete.com/
 
 # technical stuff:
 Agent uses Tauri framework. It downloads enzete games from web server.
