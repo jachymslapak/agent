@@ -9,13 +9,11 @@ Agent is client for downloading enzete games.
 Agent uses Tauri framework. It downloads enzete games from web server.
 
 #getting started:
-install:
-    `git clone https://gitlab.com/apps4665746/enzete_agent.git`
-    `cd enzete_agent`
-    `npm install`
+`git clone https://gitlab.com/apps4665746/enzete_agent.git`
+`cd enzete_agent`
+`npm install`
 
-run:
-    `npm run tauri dev`
+`npm run tauri dev`
 
 # please note:
 I am begginner. 
