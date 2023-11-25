@@ -1,11 +1,20 @@
 # what is it?
 Agent is app which downloads enzete games and installs them to your computer.
+
 Works on Mac, Linux, Windows.
 
 You can download binaries here: https://agent.enzete.com/
 
 # technical stuff:
-Agent uses Tauri framework. It downloads enzete games from web server.
+Agent uses Tauri framework, which is something like Electron, but uses Rust as it's backend.
+
+It downloads game binaries from webserver, then unzips them.
+
+
+It decides which os you use, and thanks to that it downloads games
+
+
+for your OS and installs them to your OS.
 
 # getting started:
 `git clone https://gitlab.com/apps4665746/enzete_agent.git`
