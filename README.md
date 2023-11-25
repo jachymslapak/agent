@@ -5,7 +5,8 @@ Agent is client for downloading enzete games.
 Agent uses Tauri framework. It downloads enzete games from web server.
 
 # please note:
-I am begginner with Rust, Tauri and with programming in general, please be patient if there is some bug, or some weird or really bad technical solution, like downloading files from web server.
+I am begginner. 
+Please be patient if there is some bug, or some weird or really bad technical solution.
 
 If you are person that is interested in some random app, enjoy :)
 
