@@ -1251,20 +1251,10 @@ fn player(file: File) {
     let source = Decoder::new(buffer).unwrap();
     stream_handle
       .play_raw(source
-        .convert_samples())
+        .convert_samples().amplify(0.20))
       .unwrap();
     std::thread::sleep(std::time::Duration::from_secs(5));
   } 
-}
-
-
-// for sound player to find welcome sound
-fn get_current_dir() -> String<> {
-  let res = env::current_dir();
-  match res {
-      Ok(path) => path.into_os_string().into_string().unwrap(),
-      Err(_) => "FAILED".to_string()
-  }
 }
 
 
@@ -1278,13 +1268,9 @@ fn main() {
   println!("{:#?}", dirs::home_dir());
     tauri::Builder::default()
     .setup(|app| {Ok({
-      let current_dir = get_current_dir();
-      println!("{}", current_dir);
-      let path: PathBuf = PathBuf::new();
-      let sound_path = path.join(current_dir).join("src").join("welcome.ogg");
-      println!("{}", sound_path.display());
-      //let file = std::fs::File::open(resource_path).unwrap();
-      //thread::spawn(move || player(file));
+      let resource_path = app.path_resolver().resolve_resource("resources/welcome.ogg").expect("failed to resolve resource");
+      let file = std::fs::File::open(resource_path).unwrap();
+      thread::spawn(move || player(file));
       let username = whoami::username();
       println!("{}", username);
     })

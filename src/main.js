@@ -33,6 +33,8 @@ const btm_mute = document.getElementById("btn_mute");
 
 const logo = document.getElementById("logo");               
 
+
+//VARIABLES
 var installing_netr = false;
 var installing_lcow = false;
 

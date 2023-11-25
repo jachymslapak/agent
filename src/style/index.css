@@ -1,11 +1,18 @@
 @font-face {
   font-family: 'Space Grotesk';
-  src: url("public/style/SpaceGrotesk-VariableFont_wght.ttf");
+  src: url("SpaceGrotesk-VariableFont_wght.ttf");
 }
 
 :root {
   font-family: 'Space Grotesk';
   pointer-events: none;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none; 
+  -moz-user-select: none; 
+  -ms-user-select: none; 
+  user-select: none; 
 
   --background-color: #000000;
   --border-color: #ffffff;
@@ -61,7 +68,6 @@
 button {
   font-family: 'Space Grotesk';
   font-size: 11px;
-  pointer-events: all;
   background-color: var(--btn-background-color);
   color: var(--btn-color);
   border-color: var(--btn-border-color);
