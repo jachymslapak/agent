@@ -32,7 +32,6 @@ static mut DARKNESS: bool = true;
 static mut UPDATE_NETR: bool = false;
 static mut UPDATE_LITLCOW: bool = true;
 
-
 //INITIALIZATION SCRIPTS
 #[tauri::command]
 async fn get_updates() -> String {
@@ -506,6 +505,7 @@ fn switch_mute() -> Result<()> {
 
 
 //GETTING SCRIPTS
+//settings
 #[tauri::command]
 fn get_settings() -> String {
   let json_path = match dirs::document_dir() {
@@ -598,6 +598,7 @@ fn get_mute() -> bool {
 }
 
 
+//games
 #[tauri::command]
 fn get_netr_update_state() -> bool {
   unsafe {UPDATE_NETR}
@@ -607,6 +608,183 @@ fn get_netr_update_state() -> bool {
 #[tauri::command]
 fn get_litlcow_update_state() -> bool {
   unsafe {UPDATE_LITLCOW}
+}
+
+
+fn get_installed_game_versions() -> Result<(u8, u8, u8, u8, u8, u8)> {
+  let json_path = match dirs::document_dir() {
+    Some(var) => var.join("enzete agent").join("agent files").join("agent_settings.json"),
+    None => panic!("failed to get home folder"),
+  };
+
+  #[derive(Deserialize, Serialize)]
+  struct FileStruct {
+    installed_netrv_x: u8,
+    installed_netrv_y: u8,
+    installed_netrv_z: u8,
+
+    installed_lcowv_x: u8,
+    installed_lcowv_y: u8,
+    installed_lcowv_z: u8,
+
+    installed_agentv_x: u8,
+    installed_agentv_y: u8,
+    installed_agentv_z: u8,
+
+    mute: bool,
+    darkness: bool
+  }  
+
+  let buf = fs::read(json_path)?;
+  let buf_str = str::from_utf8(&buf)?;
+  let file: FileStruct = serde_json::from_str(buf_str)?;
+
+
+  Ok((file.installed_netrv_x, file.installed_netrv_y, file.installed_netrv_z, file.installed_lcowv_x, file.installed_lcowv_y, file.installed_lcowv_z))
+}
+
+
+fn get_installed_game_versions_strings() -> Result<(String, String)> {
+  let numbers = get_installed_game_versions()?;
+
+  let netr_version_string = format!("{}.{}.{}", numbers.0, numbers.1, numbers.2); 
+  let lcow_version_string = format!("{}.{}.{}", numbers.3, numbers.4, numbers.5); 
+
+  Ok((netr_version_string, lcow_version_string))
+}
+
+
+#[tauri::command]
+fn get_netr_version_string() -> String {
+  let versions = match get_installed_game_versions_strings() {
+    Ok(result) => result,
+    Err(_) => return format!("no version")
+  };
+  let netr_version = versions.0;
+  netr_version
+}
+
+
+#[tauri::command]
+fn get_lcow_version_string() -> String {
+  let versions = match get_installed_game_versions_strings() {
+    Ok(result) => result,
+    Err(_) => return format!("none")
+  };
+  let lcow_version = versions.1;
+  lcow_version
+}
+
+
+#[tauri::command]
+fn reset_netr_version_init() {
+  reset_netr_version().unwrap()
+}  
+
+
+#[tauri::command]
+fn reset_lcow_version_init() {
+  reset_lcow_version().unwrap()
+}  
+
+
+fn reset_netr_version() -> Result<()> {
+  let settings_file_path = match dirs::document_dir() {
+    Some(var) => var.join("enzete agent").join("agent files").join("agent_settings.json"),
+    None => panic!("failed to get home folder"),
+  };
+  let settings_file_path_2 = match dirs::document_dir() {
+    Some(var) => var.join("enzete agent").join("agent files").join("agent_settings.json"),
+    None => panic!("failed to get home folder"),
+  };
+
+  #[derive(Deserialize, Serialize)]
+  struct FileStruct {
+    installed_netrv_x: u8,
+    installed_netrv_y: u8,
+    installed_netrv_z: u8,
+
+    installed_lcowv_x: u8,
+    installed_lcowv_y: u8,
+    installed_lcowv_z: u8,
+
+    installed_agentv_x: u8,
+    installed_agentv_y: u8,
+    installed_agentv_z: u8,
+
+    mute: bool,
+    darkness: bool
+  }
+
+  let buf = fs::read(settings_file_path)?;
+
+  let buf_string: &str = str::from_utf8(&buf)?;
+  let mut changed_file: FileStruct = serde_json::from_str(buf_string)?;
+
+  changed_file.installed_netrv_x = 0;
+  changed_file.installed_netrv_y = 0;
+  changed_file.installed_netrv_z = 0;
+
+  let changed_file_str = serde_json::to_string_pretty(&changed_file)?;
+
+  let mut file = fs::File::create(settings_file_path_2)?;
+  file.write_all(changed_file_str.as_bytes())?;
+  
+  Ok(())
+}
+
+
+fn reset_lcow_version() -> Result<()> {
+  let settings_file_path = match dirs::document_dir() {
+    Some(var) => var.join("enzete agent").join("agent files").join("agent_settings.json"),
+    None => panic!("failed to get home folder"),
+  };
+  let settings_file_path_2 = match dirs::document_dir() {
+    Some(var) => var.join("enzete agent").join("agent files").join("agent_settings.json"),
+    None => panic!("failed to get home folder"),
+  };
+
+  #[derive(Deserialize, Serialize)]
+  struct FileStruct {
+    installed_netrv_x: u8,
+    installed_netrv_y: u8,
+    installed_netrv_z: u8,
+
+    installed_lcowv_x: u8,
+    installed_lcowv_y: u8,
+    installed_lcowv_z: u8,
+
+    installed_agentv_x: u8,
+    installed_agentv_y: u8,
+    installed_agentv_z: u8,
+
+    mute: bool,
+    darkness: bool
+  }
+
+  let buf = fs::read(settings_file_path)?;
+
+  let buf_string: &str = str::from_utf8(&buf)?;
+  let mut changed_file: FileStruct = serde_json::from_str(buf_string)?;
+
+  changed_file.installed_lcowv_x = 0;
+  changed_file.installed_lcowv_y = 0;
+  changed_file.installed_lcowv_z = 0;
+
+  let changed_file_str = serde_json::to_string_pretty(&changed_file)?;
+
+  let mut file = fs::File::create(settings_file_path_2)?;
+  file.write_all(changed_file_str.as_bytes())?;
+  
+  Ok(())
+}
+
+
+//system
+#[tauri::command]
+fn get_os() -> String {
+  let os_type = env::consts::OS;
+  format!("{}", os_type)
 }
 
 
@@ -1150,7 +1328,6 @@ fn get_progress() -> String {
 }
 
 
-//MAC ONLY!!
 #[tauri::command]
 fn is_netr_installed() -> bool {
   let os_type = env::consts::OS;
@@ -1215,7 +1392,7 @@ fn is_litlcow_installed() -> bool {
 }
 
 
-// sound player
+// SOUND PLAYER
 fn player(file: File) {
   let json_path = match dirs::document_dir() {
     Some(var) => var.join("enzete agent").join("agent files").join("agent_settings.json"),
@@ -1276,7 +1453,7 @@ fn main() {
     })
     })
     .invoke_handler(tauri::generate_handler![
-      system_exit,
+      //INSTALLATION FUNCTIONS
       install_init, 
       get_progress, 
       delete_init, 
@@ -1284,17 +1461,28 @@ fn main() {
       disconnected,
       is_disconnected,
       retry,
+      //SETTINGS
       set_theme_init,
       switch_mute_init,
       get_settings,
       get_mute,
+      //GAME GETTERS
       get_netr_update_state,
       get_litlcow_update_state,
       is_netr_installed,
       is_litlcow_installed,
+      get_netr_version_string,
+      get_lcow_version_string,
+      //VERSION SETTINGS
+      reset_netr_version_init,
+      reset_lcow_version_init,
+      //SETTINGS GETTERS
       get_msg_status,
       get_msg_header,
-      get_msg_text
+      get_msg_text,
+      //SYSTEM COMMANDS
+      system_exit,
+      get_os
     ])
     .run(tauri::generate_context!())
     .expect("error while running tauri application");

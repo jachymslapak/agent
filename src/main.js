@@ -29,7 +29,9 @@ const ubtn_n = document.getElementById("ubtn_n");
 const ubtn_l = document.getElementById("ubtn_l");
 
 const retry_btn = document.getElementById("btn_retry");     
-const btm_mute = document.getElementById("btn_mute");                   
+const btm_mute = document.getElementById("btn_mute");     
+
+const version_tag = document.getElementById("version_tag");
 
 const logo = document.getElementById("logo");               
 
@@ -240,6 +242,11 @@ function get_installed_apps() {
         } else {
             dbtn_n.innerHTML = "install";
             dbtn_n.onclick = downloadNetr;
+            invoke('reset_netr_version_init').then(() => {
+                if (menu == 1) {
+                    displayInstalledNetrVersion();
+                } 
+            });
         }
     });
 
@@ -250,6 +257,11 @@ function get_installed_apps() {
         } else {
             dbtn_l.innerHTML = "install";
             dbtn_l.onclick = downloadLitlcow;
+            invoke('reset_lcow_version_init').then(() => {
+                if (menu == 2) {
+                    displayInstalledLitlcowVersion();
+                } 
+            });
         }
     });
     if (menu == 1) {
@@ -314,6 +326,28 @@ function get_connected_status(){
 }
 
 
+function displayInstalledNetrVersion() {
+    invoke('get_netr_version_string').then((version) => {
+        if (version == "0.0.0") {
+            version_tag.innerHTML = "";
+        } else {
+            version_tag.innerHTML = version;
+        }
+    });
+}
+
+
+function displayInstalledLitlcowVersion() {
+    invoke('get_lcow_version_string').then((version) => {
+        if (version == "0.0.0") {
+            version_tag.innerHTML = "";
+        } else {
+            version_tag.innerHTML = version;
+        }
+    });
+}
+
+
 function get_msg() {
     var msg_header = ""
     var msg_text = ""
@@ -341,6 +375,8 @@ function get_msg() {
 }
 
 function dot1Click() {
+    displayInstalledNetrVersion();
+
     menu = 1;
 
     dbtn_n.style.visibility = "visible";
@@ -376,6 +412,8 @@ function dot1Click() {
 
 
 function dot2Click() {
+    displayInstalledLitlcowVersion();
+
     menu = 2;
 
     dbtn_n.style.visibility = "hidden";
@@ -427,7 +465,7 @@ function updateNetr() {
     deleteNetr(update).then(() => {
         downloadNetr();
     });
-} 
+}
 
 
 function downloadNetr() {
@@ -463,6 +501,7 @@ function installNetr() {
             
             installing_netr = false;
             get_settings();
+            displayInstalledNetrVersion();
         } else {
             dbtn_n.innerHTML = message
         }

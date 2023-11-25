@@ -77,6 +77,7 @@ button {
   padding: 7px;
   border-width: thin;
   text-align: center;
+  animation: g 1000ms;
 }
 
 #dev_tag {
@@ -91,6 +92,23 @@ button {
   padding: 5px;
   top: 3.7%;
   left: 60%;
+  right: 0;
+  text-align: center;
+  width: 100px;
+}
+
+#version_tag {
+  background-color: var(--btn-background-color);
+  color: var(--btn-color);
+  border-color: var(--btn-border-color);
+  cursor: var(--btn-cursor);
+
+  border-style: none;
+  position: absolute;
+  margin: auto;
+  padding: 5px;
+  top: 72.5%;
+  left: 0;
   right: 0;
   text-align: center;
   width: 100px;
