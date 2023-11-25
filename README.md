@@ -1,8 +1,21 @@
+# hello
+Thanks for visiting agent GitLab page!
+Hello to all my friends! (only them are propably seeing this)
+
 # what is agent?
 Agent is client for downloading enzete games.
 
 # technical stuff:
 Agent uses Tauri framework. It downloads enzete games from web server.
+
+#getting started:
+install:
+    `git clone https://gitlab.com/apps4665746/enzete_agent.git`
+    `cd enzete_agent`
+    `npm install`
+
+run:
+    `npm run tauri dev`
 
 # please note:
 I am begginner. 
