@@ -17,7 +17,7 @@ It decides which os you use, and thanks to that it downloads games
 for your OS and installs them to your OS.
 
 # getting started:
-`git clone https://gitlab.com/apps4665746/enzete_agent.git`
+`git clone https://gitlab.com/enzete_apps/agent.git`
 
 `cd enzete_agent`
 
