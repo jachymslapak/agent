@@ -39,11 +39,11 @@ async fn get_updates() -> String {
   let mut connected: bool = true;
 
   println!("early init start");
-  let doc_folder = match dirs::document_dir() {
+  let doc_folder = match dirs::config_dir() {
     Some(var) => var.join("enzete agent").join("agent files"),
     None => panic!("failed to get home folder"),
   };
-  let json_path = match dirs::document_dir() {
+  let json_path = match dirs::config_dir() {
     Some(var) => var.join("enzete agent").join("agent files").join("agent.json"),
     None => panic!("failed to get home folder"),
   };
@@ -65,7 +65,7 @@ async fn get_updates() -> String {
     println!("file downloaded");
 
   
-    let json_path = match dirs::document_dir() {
+    let json_path = match dirs::config_dir() {
       Some(var) => var.join("enzete agent").join("agent files").join("agent.json"),
       None => panic!("failed to get home folder"),
     };
@@ -135,7 +135,7 @@ async fn get_updates() -> String {
       darkness: bool
     }
 
-    let json_path = match dirs::document_dir() {
+    let json_path = match dirs::config_dir() {
       Some(var) => var.join("enzete agent").join("agent files").join("agent_settings.json"),
       None => panic!("failed to get home folder"),
     };
@@ -163,16 +163,24 @@ async fn get_updates() -> String {
     // COMPARING VERSIONS
     if installed_netr_version_number == netr_version_number {
       unsafe {UPDATE_NETR = false}
-      println!("netr: same version")
+      println!("netr: same version");
+      println!("{}:{}", installed_lcow_version_number, netr_version_number);
+      println!("");
     } else if installed_netr_version_number < netr_version_number {
       unsafe {UPDATE_NETR = true}
-      println!("netr: update available")
+      println!("netr: update available");
+      println!("{}:{}", installed_lcow_version_number, netr_version_number);
+      println!("");
     } else if installed_netr_version_number > netr_version_number {
       unsafe {UPDATE_NETR = false}
-      println!("netr: downgrade")
+      println!("netr: downgrade");
+      println!("{}:{}", installed_lcow_version_number, netr_version_number);
+      println!("");
     } else {
       unsafe {UPDATE_NETR = false}
-      println!("netr: version compare error") 
+      println!("netr: version compare error");
+      println!("{}:{}", installed_lcow_version_number, netr_version_number);
+      println!("");
     }
 
     if installed_lcow_version_number == litlcow_version_number {
@@ -219,11 +227,11 @@ async fn download_json(doc_folder: PathBuf, json_path: PathBuf) -> Result<()> {
 
 
 fn create_settings_file() -> Result<()> {
-  let settings_file_path = match dirs::document_dir() {
+  let settings_file_path = match dirs::config_dir() {
     Some(var) => var.join("enzete agent").join("agent files").join("agent_settings.json"),
     None => panic!("failed to get home folder"),
   };
-  let settings_file_path_2 = match dirs::document_dir() {
+  let settings_file_path_2 = match dirs::config_dir() {
     Some(var) => var.join("enzete agent").join("agent files").join("agent_settings.json"),
     None => panic!("failed to get home folder"),
   };
@@ -299,7 +307,7 @@ fn create_settings_file() -> Result<()> {
 
 #[tauri::command]
 fn get_msg_status() -> bool {
-  let json_path = match dirs::document_dir() {
+  let json_path = match dirs::config_dir() {
     Some(var) => var.join("enzete agent").join("agent files").join("agent.json"),
     None => panic!("failed to get home folder"),
   };
@@ -334,7 +342,7 @@ fn get_msg_status() -> bool {
 
 #[tauri::command]
 fn get_msg_header() -> String {
-  let json_path = match dirs::document_dir() {
+  let json_path = match dirs::config_dir() {
     Some(var) => var.join("enzete agent").join("agent files").join("agent.json"),
     None => panic!("failed to get home folder"),
   };
@@ -369,7 +377,7 @@ fn get_msg_header() -> String {
 
 #[tauri::command]
 fn get_msg_text() -> String {
-  let json_path = match dirs::document_dir() {
+  let json_path = match dirs::config_dir() {
     Some(var) => var.join("enzete agent").join("agent files").join("agent.json"),
     None => panic!("failed to get home folder"),
   };
@@ -417,12 +425,12 @@ fn switch_mute_init() {
 
 
 fn set_theme(value: bool) -> Result<()> {
-  let settings_file_path = match dirs::document_dir() {
+  let settings_file_path = match dirs::config_dir() {
     Some(var) => var.join("enzete agent").join("agent files").join("agent_settings.json"),
     None => panic!("failed to get home folder"),
   };
 
-  let settings_file_path_2 = match dirs::document_dir() {
+  let settings_file_path_2 = match dirs::config_dir() {
     Some(var) => var.join("enzete agent").join("agent files").join("agent_settings.json"),
     None => panic!("failed to get home folder"),
   };
@@ -461,12 +469,12 @@ fn set_theme(value: bool) -> Result<()> {
 
 
 fn switch_mute() -> Result<()> {
-  let settings_file_path = match dirs::document_dir() {
+  let settings_file_path = match dirs::config_dir() {
     Some(var) => var.join("enzete agent").join("agent files").join("agent_settings.json"),
     None => panic!("failed to get home folder"),
   };
 
-  let settings_file_path_2 = match dirs::document_dir() {
+  let settings_file_path_2 = match dirs::config_dir() {
     Some(var) => var.join("enzete agent").join("agent files").join("agent_settings.json"),
     None => panic!("failed to get home folder"),
   };
@@ -508,7 +516,7 @@ fn switch_mute() -> Result<()> {
 //settings
 #[tauri::command]
 fn get_settings() -> String {
-  let json_path = match dirs::document_dir() {
+  let json_path = match dirs::config_dir() {
     Some(var) => var.join("enzete agent").join("agent files").join("agent_settings.json"),
     None => panic!("failed to get home folder"),
   };
@@ -567,7 +575,7 @@ fn get_settings() -> String {
 #[tauri::command]
 fn get_mute() -> bool {
   println!("getting mute state");
-  let json_path = match dirs::document_dir() {
+  let json_path = match dirs::config_dir() {
     Some(var) => var.join("enzete agent").join("agent files").join("agent_settings.json"),
     None => panic!("failed to get home folder"),
   };
@@ -612,7 +620,7 @@ fn get_litlcow_update_state() -> bool {
 
 
 fn get_installed_game_versions() -> Result<(u8, u8, u8, u8, u8, u8)> {
-  let json_path = match dirs::document_dir() {
+  let json_path = match dirs::config_dir() {
     Some(var) => var.join("enzete agent").join("agent files").join("agent_settings.json"),
     None => panic!("failed to get home folder"),
   };
@@ -661,6 +669,7 @@ fn get_netr_version_string() -> String {
     Err(_) => return format!("no version")
   };
   let netr_version = versions.0;
+  println!("getting netr version: {}", netr_version);
   netr_version
 }
 
@@ -672,6 +681,7 @@ fn get_lcow_version_string() -> String {
     Err(_) => return format!("none")
   };
   let lcow_version = versions.1;
+  println!("getting litlcow version: {}", lcow_version);
   lcow_version
 }
 
@@ -876,7 +886,7 @@ async fn install_init(game_name: String) {
 
 
 fn get_download_versions() -> (String, String) {
-  let json_path = match dirs::document_dir() {
+  let json_path = match dirs::config_dir() {
     Some(var) => var.join("enzete agent").join("agent files").join("agent.json"),
     None => panic!("failed to get home folder"),
   };
@@ -914,7 +924,7 @@ fn get_download_versions() -> (String, String) {
 
 
 fn get_download_versions_as_numbers() -> (u8, u8, u8, u8, u8, u8) {
-  let json_path = match dirs::document_dir() {
+  let json_path = match dirs::config_dir() {
     Some(var) => var.join("enzete agent").join("agent files").join("agent.json"),
     None => panic!("failed to get home folder"),
   };
@@ -999,12 +1009,12 @@ async fn install_file(path_final: &PathBuf, game_title: &str) -> Result<()> {
   };
   let os_type: &str = env::consts::OS;
 
-  let settings_file_path = match dirs::document_dir() {
+  let settings_file_path = match dirs::config_dir() {
     Some(var) => var.join("enzete agent").join("agent files").join("agent_settings.json"),
     None => panic!("failed to get home folder"),
   };
 
-  let settings_file_path_2 = match dirs::document_dir() {
+  let settings_file_path_2 = match dirs::config_dir() {
     Some(var) => var.join("enzete agent").join("agent files").join("agent_settings.json"),
     None => panic!("failed to get home folder"),
   };
@@ -1109,6 +1119,7 @@ async fn install_file(path_final: &PathBuf, game_title: &str) -> Result<()> {
     let changed_file_str = serde_json::to_string_pretty(&changed_file)?;
   
     let mut file = fs::File::create(settings_file_path_2)?;
+    println!("writing to settings netr: {}.{}.{}", netrv_x, netrv_x, netrv_z);
     file.write_all(changed_file_str.as_bytes())?;
 
 
@@ -1154,13 +1165,14 @@ async fn install_file(path_final: &PathBuf, game_title: &str) -> Result<()> {
     let lcowv_y = versions.4;
     let lcowv_z = versions.5;
 
-    changed_file.installed_netrv_x = lcowv_x;
-    changed_file.installed_netrv_y = lcowv_y;
-    changed_file.installed_netrv_z = lcowv_z;
+    changed_file.installed_lcowv_x = lcowv_x;
+    changed_file.installed_lcowv_y = lcowv_y;
+    changed_file.installed_lcowv_z = lcowv_z;
 
     let changed_file_str = serde_json::to_string_pretty(&changed_file)?;
   
     let mut file = fs::File::create(settings_file_path_2)?;
+    println!("writing to settings lcow: {}.{}.{}", lcowv_x, lcowv_y, lcowv_z);
     file.write_all(changed_file_str.as_bytes())?;
   }
   
@@ -1394,7 +1406,7 @@ fn is_litlcow_installed() -> bool {
 
 // SOUND PLAYER
 fn player(file: File) {
-  let json_path = match dirs::document_dir() {
+  let json_path = match dirs::config_dir() {
     Some(var) => var.join("enzete agent").join("agent files").join("agent_settings.json"),
     None => panic!("failed to get home folder"),
   };
@@ -1445,6 +1457,7 @@ fn main() {
   println!("{:#?}", dirs::home_dir());
     tauri::Builder::default()
     .setup(|app| {Ok({
+      println!("{:?}", dirs::config_dir());
       let resource_path = app.path_resolver().resolve_resource("resources/welcome.ogg").expect("failed to resolve resource");
       let file = std::fs::File::open(resource_path).unwrap();
       thread::spawn(move || player(file));

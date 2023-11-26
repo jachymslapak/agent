@@ -45,7 +45,7 @@ let menu = 1;
 //GETS INSTALLED APPS
 get_installed_apps()
 //SETTS INTERVAL TO UPDATE INSTALLED APPS
-var fEI = setInterval(get_installed_apps, 5000);
+var fEI = setInterval(get_installed_apps, 10000);
 //CHECK ONLINE STATUS
 get_connected_status();
 //SELECTS MAIN MENU
@@ -242,11 +242,9 @@ function get_installed_apps() {
         } else {
             dbtn_n.innerHTML = "install";
             dbtn_n.onclick = downloadNetr;
-            invoke('reset_netr_version_init').then(() => {
-                if (menu == 1) {
-                    displayInstalledNetrVersion();
-                } 
-            });
+            if (menu == 1) {
+                displayInstalledNetrVersion();
+            } 
         }
     });
 
@@ -257,11 +255,6 @@ function get_installed_apps() {
         } else {
             dbtn_l.innerHTML = "install";
             dbtn_l.onclick = downloadLitlcow;
-            invoke('reset_lcow_version_init').then(() => {
-                if (menu == 2) {
-                    displayInstalledLitlcowVersion();
-                } 
-            });
         }
     });
     if (menu == 1) {
@@ -494,14 +487,12 @@ function installNetr() {
     invoke('install_init', { gameName: 'netr' });
     var interval = setInterval(function(){invoke('get_progress').then((message) => {
         if (message == "d") {
-            get_installed_apps();
-            
             clearInterval(interval);
-            fEI = setInterval(get_installed_apps, 5000);
-            
+            fEI = setInterval(get_installed_apps, 10000);
             installing_netr = false;
             get_settings();
-            displayInstalledNetrVersion();
+            get_installed_apps()
+            invoke('get_updates').then(() => {displayInstalledNetrVersion();});
         } else {
             dbtn_n.innerHTML = message
         }
@@ -538,13 +529,12 @@ function installLitlCow() {
     invoke('install_init', { gameName: 'litlcow' });
     var interval = setInterval(function(){invoke('get_progress').then((message) => {
         if (message == "d") {
-            get_installed_apps();
-            
+            get_installed_apps();            
             clearInterval(interval);
-            fEI = setInterval(get_installed_apps, 5000);
-            
+            fEI = setInterval(get_installed_apps, 10000);
             installing_lcow = false;
             get_settings();
+            invoke('get_updates').then(() => {displayInstalledLitlcowVersion();});
         } else {
             dbtn_l.innerHTML = message
         }
@@ -577,12 +567,12 @@ function deleteNetr(update) {
                     err_e1.innerHTML = "Delete your game in order to update."
                     err_e2.innerHTML = "Go to: > HOME folder > Applications"
                     err_e3.innerHTML = ""
-                    err_e4.innerHTML = "Because agent has no permissions to delete your game. You need to delete it manualy."
+                    err_e4.innerHTML = "Because agent has no permissions to delete your game on macOS. You need to delete it manualy."
                 } else {
                     err_e1.innerHTML = "No permission to delete your game."
                     err_e2.innerHTML = "Go to: > HOME folder > Applications"
                     err_e3.innerHTML = ""
-                    err_e4.innerHTML = "Because agent has no permissions to delete your game. You need to delete it manualy."
+                    err_e4.innerHTML = "Because agent has no permissions to delete your game on macOS. You need to delete it manualy."
                 }
             }
             get_installed_apps();
@@ -607,12 +597,12 @@ function deleteLitlcow(update) {
                     err_e1.innerHTML = "Delete your game in order to update."
                     err_e2.innerHTML = "Go to: > HOME folder > Applications"
                     err_e3.innerHTML = ""
-                    err_e4.innerHTML = "Because agent has no permissions to delete your game. You need to delete it manualy."
+                    err_e4.innerHTML = "Because agent has no permissions to delete your game on macOS. You need to delete it manualy."
                 } else {
                     err_e1.innerHTML = "No permission to delete your game."
                     err_e2.innerHTML = "Go to: > HOME folder > Applications"
                     err_e3.innerHTML = ""
-                    err_e4.innerHTML = "Because agent has no permissions to delete your game. You need to delete it manualy."
+                    err_e4.innerHTML = "Because agent has no permissions to delete your game on macOS. You need to delete it manualy."
                 }
             }
             get_installed_apps();
