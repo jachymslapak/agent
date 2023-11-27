@@ -152,9 +152,9 @@ async fn get_updates() -> String {
       let installed_netr_version_xy = installed_netr_version_x.replace("y", format!("{}", structure.installed_netrv_y).as_str());
       let installed_netr_version_xyz = installed_netr_version_xy.replace("z", format!("{}", structure.installed_netrv_z).as_str());
 
-      let installed_litlcow_version_x = version_table.replace("x", format!("{}", structure.installed_netrv_x).as_str());
-      let installed_litlcow_version_xy = installed_litlcow_version_x.replace("y", format!("{}", structure.installed_netrv_y).as_str());
-      let installed_litlcow_version_xyz = installed_litlcow_version_xy.replace("z", format!("{}", structure.installed_netrv_z).as_str());
+      let installed_litlcow_version_x = version_table.replace("x", format!("{}", structure.installed_lcowv_x).as_str());
+      let installed_litlcow_version_xy = installed_litlcow_version_x.replace("y", format!("{}", structure.installed_lcowv_y).as_str());
+      let installed_litlcow_version_xyz = installed_litlcow_version_xy.replace("z", format!("{}", structure.installed_lcowv_z).as_str());
 
       installed_netr_version_number = installed_netr_version_xyz.parse::<u16>().unwrap();
       installed_lcow_version_number = installed_litlcow_version_xyz.parse::<u16>().unwrap();
@@ -164,34 +164,40 @@ async fn get_updates() -> String {
     if installed_netr_version_number == netr_version_number {
       unsafe {UPDATE_NETR = false}
       println!("netr: same version");
-      println!("{}:{}", installed_lcow_version_number, netr_version_number);
+      println!("{}:{}", installed_netr_version_number, netr_version_number);
       println!("");
     } else if installed_netr_version_number < netr_version_number {
       unsafe {UPDATE_NETR = true}
       println!("netr: update available");
-      println!("{}:{}", installed_lcow_version_number, netr_version_number);
+      println!("{}:{}", installed_netr_version_number, netr_version_number);
       println!("");
     } else if installed_netr_version_number > netr_version_number {
       unsafe {UPDATE_NETR = false}
       println!("netr: downgrade");
-      println!("{}:{}", installed_lcow_version_number, netr_version_number);
+      println!("{}:{}", installed_netr_version_number, netr_version_number);
       println!("");
     } else {
       unsafe {UPDATE_NETR = false}
       println!("netr: version compare error");
-      println!("{}:{}", installed_lcow_version_number, netr_version_number);
+      println!("{}:{}", installed_netr_version_number, netr_version_number);
       println!("");
     }
 
     if installed_lcow_version_number == litlcow_version_number {
       unsafe {UPDATE_LITLCOW = false}
-      println!("litlcow: same version")
+      println!("litlcow: same version");
+      println!("{}:{}", installed_lcow_version_number, litlcow_version_number);
+      println!("");
     } else if installed_lcow_version_number < litlcow_version_number {
       unsafe {UPDATE_LITLCOW = true}
-      println!("litlcow: update available")
+      println!("litlcow: update available");
+      println!("{}:{}", installed_lcow_version_number, litlcow_version_number);
+      println!("");
     } else if installed_lcow_version_number > litlcow_version_number {
       unsafe {UPDATE_LITLCOW = false}
-      println!("litlcow: downgrade")
+      println!("litlcow: downgrade");
+      println!("{}:{}", installed_lcow_version_number, litlcow_version_number);
+      println!("");
     } else {
       unsafe {UPDATE_LITLCOW = false}
       println!("litlcow: version compare error") 
@@ -1419,7 +1425,10 @@ fn player(file: File) {
     darkness: bool
   }
 
-  let buf = fs::read(json_path).expect("error with reading agent.json");
+  let buf = match fs::read(json_path) {
+    Ok(var) => var,
+    Err(_) => {play_init(file); panic!("playing play init")}
+  };
   let buf_str = str::from_utf8(&buf).expect("failed to create string from bytes from agent.json");
   let structure: FileStruct = serde_json::from_str(buf_str).expect("failed to create structure from agent.json");
 
@@ -1434,6 +1443,19 @@ fn player(file: File) {
       .unwrap();
     std::thread::sleep(std::time::Duration::from_secs(5));
   } 
+}
+
+
+fn play_init(file: File) {
+  thread::sleep(time::Duration::from_millis(500));
+  let (_stream, stream_handle) = OutputStream::try_default().unwrap(); 
+  let buffer = BufReader::new(file);
+  let source = Decoder::new(buffer).unwrap();
+  stream_handle
+    .play_raw(source
+      .convert_samples().amplify(0.20))
+    .unwrap();
+  std::thread::sleep(std::time::Duration::from_secs(5));
 }
 
 
