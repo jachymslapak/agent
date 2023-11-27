@@ -89,6 +89,8 @@ function get_settings() {
             css_root.setProperty('--btn-color', '#ffffff');
             css_root.setProperty('--btn-border-color', '#ffffff');
 
+            css_root.setProperty('--btn-hover-border-color', '#4d4d4d');
+
             if (installing_lcow == true) {
                 css_root.setProperty('--i_n-btn-background-color', '#000000');
                 css_root.setProperty('--i_n-btn-color', '#4d4d4d');
@@ -164,6 +166,8 @@ function get_settings() {
             css_root.setProperty('--btn-color', '#000000');
             css_root.setProperty('--btn-border-color', '#000000');
 
+            css_root.setProperty('--btn-hover-border-color', '#b3b3b3');
+
             if (installing_lcow == true) {
                 css_root.setProperty('--i_n-btn-background-color', '#ffffff');
                 css_root.setProperty('--i_n-btn-color', '#b3b3b3');
@@ -192,7 +196,7 @@ function get_settings() {
 
                 css_root.setProperty('--i_n-btn-background-color', '#ffffff');
                 css_root.setProperty('--i_n-btn-color', '#000000');
-                css_root.setProperty('--i_n-btn-border-color', '#000000');
+                css_root.setProperty('--i_n-btn-border-color', '#b3b3b3');
 
 
                 css_root.setProperty('--u_n-btn-background-color', '#ffffff');

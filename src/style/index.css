@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'Space Grotesk';
   src: url("SpaceGrotesk-VariableFont_wght.ttf");
+  font-family: 'Space Grotesk';
 }
 
 :root {
@@ -48,9 +48,7 @@
   --btn-border-color: #ffffff;
   --btn-color: #ffffff;
 
-  --btn-background-color: #000000;
-  --btn-border-color: #ffffff;
-  --btn-color: #ffffff;
+  --btn-hover-border-color: #4D4D4D;
 
   background-color: var(--background-color);
   border-color: var(--border-color);
@@ -77,6 +75,11 @@ button {
   padding: 7px;
   border-width: thin;
   text-align: center;
+  transition: border-color 0.20s;
+}
+
+button:hover {
+  border-color: var(--btn-hover-border-color);
 }
 
 #dev_tag {
@@ -129,6 +132,11 @@ button {
   text-align: center;
   width: 70px;
   animation: darkenn 1000ms;
+  transition: border-color 0.20s;
+}
+
+#dbtn_n:hover {
+  border-color: var(--btn-hover-border-color);
 }
 
 #dbtn_l {
@@ -146,6 +154,11 @@ button {
   text-align: center;
   width: 70px;
   animation: darkenn 1000ms;
+  transition: border-color 0.20s;
+}
+
+#dbtn_l:hover {
+  border-color: var(--btn-hover-border-color);
 }
 
 #ubtn_n {
@@ -163,6 +176,11 @@ button {
   text-align: center;
   width: 70px;
   animation: darkenn 1000ms;
+  transition: border-color 0.20s;
+}
+
+#ubtn_n:hover {
+  border-color: var(--btn-hover-border-color);
 }
 
 #ubtn_l {
@@ -180,6 +198,11 @@ button {
   text-align: center;
   width: 70px;
   animation: darkenn 1000ms;
+  transition: border-color 0.20s;
+}
+
+#ubtn_l:hover {
+  border-color: var(--btn-hover-border-color);
 }
 
 #rbtn_n {
@@ -197,6 +220,11 @@ button {
   text-align: center;
   width: 70px;
   animation: darkenn 1000ms;
+  transition: border-color 0.20s;
+}
+
+#rbtn_n:hover {
+  border-color: var(--btn-hover-border-color);
 }
 
 #rbtn_l {
@@ -214,6 +242,11 @@ button {
   text-align: center;
   width: 70px;
   animation: darkenn 1000ms;
+  transition: border-color 0.20s;
+}
+
+#rbtn_l:hover {
+  border-color: var(--btn-hover-border-color);
 }
 
 #retrybtn {
@@ -222,6 +255,11 @@ button {
   color: var(--r-btn-color);
   border-color: var(--r-btn-border-color);
   cursor: var(--r-btn-cursor);
+  transition: border-color 0.20s;
+}
+
+#retrybtn:hover {
+  border-color: var(--btn-hover-border-color);
 }
 /* SPLASH SCREEN */
 
