@@ -686,18 +686,6 @@ fn get_lcow_version_string() -> String {
 }
 
 
-#[tauri::command]
-fn reset_netr_version_init() {
-  reset_netr_version().unwrap()
-}  
-
-
-#[tauri::command]
-fn reset_lcow_version_init() {
-  reset_lcow_version().unwrap()
-}  
-
-
 fn reset_netr_version() -> Result<()> {
   let settings_file_path = match dirs::document_dir() {
     Some(var) => var.join("enzete agent").join("agent files").join("agent_settings.json"),
@@ -1223,7 +1211,7 @@ async fn delete_init(game_name: String) -> String {
 }
 
 
-async fn delete(game_title: String) -> Result<()> {  
+async fn delete(game_title: String) -> Result<()> {
   let os_type = env::consts::OS;
   if os_type == "macos" {unsafe{PROGRESS = -5}}
   
@@ -1231,13 +1219,13 @@ async fn delete(game_title: String) -> Result<()> {
     unsafe {PROGRESS = -4;}
     
     if game_title == "netr" {
+      reset_netr_version().expect("error with reseting version");
       
       if os_type == "linux" {
         let netr_path_linux = match dirs::executable_dir() {
           Some(var) => var.join("netr.x86_64"),
           None => panic!("failed to get home folder"),
         };
-
         std::fs::remove_file(netr_path_linux)?;
 
       } else if os_type == "windows" {
@@ -1245,11 +1233,13 @@ async fn delete(game_title: String) -> Result<()> {
           Some(var) => var.join("netr.exe"),
           None => panic!("failed to get home folder"),
         };
-        std::fs::remove_file(netr_path_win)?;
+        std::fs::remove_file(netr_path_win).unwrap();
       }
-      
-    } else if game_title == "litlcow" {
-      
+    }
+
+    if game_title == "litlcow" {
+      reset_lcow_version().expect("error with reseting version");
+
       if os_type == "linux" {
         let litlcow_path_linux = match dirs::executable_dir() {
           Some(var) => var.join("litlcow.x86_64"),
@@ -1486,9 +1476,6 @@ fn main() {
       is_litlcow_installed,
       get_netr_version_string,
       get_lcow_version_string,
-      //VERSION SETTINGS
-      reset_netr_version_init,
-      reset_lcow_version_init,
       //SETTINGS GETTERS
       get_msg_status,
       get_msg_header,

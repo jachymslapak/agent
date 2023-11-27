@@ -242,7 +242,7 @@ function get_installed_apps() {
         } else {
             dbtn_n.innerHTML = "install";
             dbtn_n.onclick = downloadNetr;
-            if (menu == 1) {
+            if (menu == 1 && installing_netr == false) {
                 displayInstalledNetrVersion();
             } 
         }
@@ -271,7 +271,7 @@ function get_installed_apps() {
                 ubtn_n.style.visibility = "hidden";
             }
         });
-    } else if (menu == 2) {
+    } else if (menu == 2 && installing_lcow == false) {
         invoke('get_litlcow_update_state').then((state) => {
             if (state == true) {
                 invoke('is_litlcow_installed').then((installed) => {
@@ -455,8 +455,22 @@ function screwCloseClick() {
 
 function updateNetr() {
     var update = true;
+    installing_netr = true;
     deleteNetr(update).then(() => {
-        downloadNetr();
+        downloadNetr().then(() => {
+            
+        });
+    });
+}
+
+
+function updateLitlcow() {
+    var update = true;
+    installing_lcow = true;
+    deleteLitlcow(update).then(() => {
+        downloadNetr().then(() => {
+
+        });
     });
 }
 
