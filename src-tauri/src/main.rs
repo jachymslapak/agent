@@ -693,11 +693,11 @@ fn get_lcow_version_string() -> String {
 
 
 fn reset_netr_version() -> Result<()> {
-  let settings_file_path = match dirs::document_dir() {
+  let settings_file_path = match dirs::config_dir() {
     Some(var) => var.join("enzete agent").join("agent files").join("agent_settings.json"),
     None => panic!("failed to get home folder"),
   };
-  let settings_file_path_2 = match dirs::document_dir() {
+  let settings_file_path_2 = match dirs::config_dir() {
     Some(var) => var.join("enzete agent").join("agent files").join("agent_settings.json"),
     None => panic!("failed to get home folder"),
   };
@@ -739,11 +739,11 @@ fn reset_netr_version() -> Result<()> {
 
 
 fn reset_lcow_version() -> Result<()> {
-  let settings_file_path = match dirs::document_dir() {
+  let settings_file_path = match dirs::config_dir() {
     Some(var) => var.join("enzete agent").join("agent files").join("agent_settings.json"),
     None => panic!("failed to get home folder"),
   };
-  let settings_file_path_2 = match dirs::document_dir() {
+  let settings_file_path_2 = match dirs::config_dir() {
     Some(var) => var.join("enzete agent").join("agent files").join("agent_settings.json"),
     None => panic!("failed to get home folder"),
   };
@@ -1225,14 +1225,13 @@ async fn delete(game_title: String) -> Result<()> {
     unsafe {PROGRESS = -4;}
     
     if game_title == "netr" {
-      reset_netr_version().expect("error with reseting version");
-      
       if os_type == "linux" {
         let netr_path_linux = match dirs::executable_dir() {
           Some(var) => var.join("netr.x86_64"),
           None => panic!("failed to get home folder"),
         };
         std::fs::remove_file(netr_path_linux)?;
+        reset_netr_version().expect("error with reseting version");
 
       } else if os_type == "windows" {
         let netr_path_win = match dirs::desktop_dir() {
@@ -1240,25 +1239,33 @@ async fn delete(game_title: String) -> Result<()> {
           None => panic!("failed to get home folder"),
         };
         std::fs::remove_file(netr_path_win).unwrap();
+        println!("file removed");
+        reset_netr_version().expect("error with reseting version");
+        println!("file reseted");
       }
     }
 
     if game_title == "litlcow" {
-      reset_lcow_version().expect("error with reseting version");
-
       if os_type == "linux" {
         let litlcow_path_linux = match dirs::executable_dir() {
           Some(var) => var.join("litlcow.x86_64"),
           None => panic!("failed to get home folder"),
         };
-
         std::fs::remove_file(litlcow_path_linux)?;
+        println!("file removed");
+        reset_lcow_version().expect("error with reseting version");
+        println!("file reseted");
+
       } else if os_type == "windows" {
         let litlcow_path_win = match dirs::desktop_dir() {
           Some(var) => var.join("litlcow.exe"),
           None => panic!("failed to get home folder"),
         };
         std::fs::remove_file(litlcow_path_win)?;
+        println!("file removed");
+        reset_lcow_version().expect("error with reseting version");
+        println!("file reseted");
+
       }   
     }
   }

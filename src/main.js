@@ -1,4 +1,5 @@
 const { invoke } = window.__TAURI__.tauri;
+const { relaunch } = window.__TAURI__.process;
 
 const css_root = document.documentElement.style;
 
@@ -458,23 +459,15 @@ function screwCloseClick() {
 
 
 function updateNetr() {
-    var update = true;
-    installing_netr = true;
-    deleteNetr(update).then(() => {
-        downloadNetr().then(() => {
-            
-        });
+    deleteNetr(true).then(() => {
+        downloadNetr();
     });
 }
 
 
 function updateLitlcow() {
-    var update = true;
-    installing_lcow = true;
-    deleteLitlcow(update).then(() => {
-        downloadNetr().then(() => {
-
-        });
+    deleteLitlcow(true).then(() => {
+        downloadLitlcow();
     });
 }
 
@@ -648,4 +641,12 @@ function muteSwitch() {
     invoke('switch_mute_init').then(() => {
         get_settings();
     });
+}
+
+function relaunchIt() {
+    relaunchAgent();
+}
+
+async function relaunchAgent() {
+    await relaunch();
 }
