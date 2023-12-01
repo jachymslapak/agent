@@ -13,6 +13,7 @@ use std::str;
 use std::process::Command;
 
 use rodio::{Decoder, OutputStream, source::Source};
+use tauri::{api::process::restart, Manager};
 use serde::{Deserialize, Serialize};
 use tar::Archive;
 use reqwest::Client;
@@ -1472,6 +1473,11 @@ fn system_exit() {
 }
 
 
+#[tauri::command]
+fn system_restart(app_handle: tauri::AppHandle) {
+  restart(&app_handle.env());
+}
+
 fn main() { 
   println!("{:#?}", dirs::home_dir());
     tauri::Builder::default()
@@ -1511,6 +1517,7 @@ fn main() {
       get_msg_text,
       //SYSTEM COMMANDS
       system_exit,
+      system_restart,
       get_os
     ])
     .run(tauri::generate_context!())

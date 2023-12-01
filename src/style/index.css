@@ -73,9 +73,10 @@ button {
   border-style: solid;
   border-radius: 10px;
   padding: 7px;
-  border-width: thin;
+  border-width: 1.5px;
   text-align: center;
   transition: border-color 0.20s;
+  font-weight: normal;
 }
 
 button:hover {
@@ -387,7 +388,7 @@ h2 {
   right: 0;
   bottom: 2rem;
   margin: auto;
-  width: 300px;
+  width: 220px;
   height: 400px;
   border-radius: 10px;
   border-style: solid;
@@ -396,7 +397,7 @@ h2 {
   animation-fill-mode: forwards;
   padding: 10px;
   text-align: center;
-  border-width: thin;
+  border-width: 1.5px;
 }
 
 .error_window_visible {
@@ -419,17 +420,23 @@ h2 {
   animation-fill-mode: forwards;
   padding: 10px;
   text-align: left;
-  border-width: thin;
+  border-width: 1.5px;
   line-height: 1.5;
 }
 
 #left_bar {
   position: absolute;
-  top: 82px;
-  left: 5px;
+  top: 84px;
+  left: 11px;
   right: 90vh;
-  bottom: 0;
+  bottom: 11px;
+  width: 60px;
   margin: auto;
+  
+  border-style: solid;
+  border-color: var(--border-color);
+  border-width: 1.5px;
+  border-radius: 10px;
 }
 
 #dot1 {
@@ -460,7 +467,7 @@ h2 {
   top: 550px;
   left: 30px;
   right: 400px;
-  bottom: 0;
+  bottom: 40px;
   margin: auto;
   cursor: pointer;
 }

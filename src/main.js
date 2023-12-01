@@ -7,18 +7,18 @@ const game_title = document.getElementById("game_title");
 const game_text1 = document.getElementById("game_text1");
 const game_text2 = document.getElementById("game_text2");
 const game_text3 = document.getElementById("game_text3");
-const f_info = document.getElementById("footer_info");
+const footer_info = document.getElementById("footer_info");
 
-const kkt = document.getElementById("kokot");               
-const kkt2 = document.getElementById("kokot2");                         
-const kkt3 = document.getElementById("kokot3");
+const kokot = document.getElementById("kokot");               
+const kokot2 = document.getElementById("kokot2");                         
+const kokot3 = document.getElementById("kokot3");
 
-const err_o = document.getElementById("error_overlay");     
-const err_w = document.getElementById("error_window");                  
-const err_e1 = document.getElementById("e1");   
-const err_e2 = document.getElementById("e2");   
-const err_e3 = document.getElementById("e3");   
-const err_e4 = document.getElementById("e4");                       
+const error_overlay = document.getElementById("error_overlay");     
+const error_window = document.getElementById("error_window");                  
+const e1 = document.getElementById("e1");   
+const e2 = document.getElementById("e2");   
+const e3 = document.getElementById("e3");   
+const e4 = document.getElementById("e4");                       
 
 const dot1 = document.getElementById("dot1");               
 const dot2 = document.getElementById("dot2");
@@ -29,8 +29,8 @@ const dbtn_l = document.getElementById("dbtn_l");
 const ubtn_n = document.getElementById("ubtn_n");           
 const ubtn_l = document.getElementById("ubtn_l");
 
-const retry_btn = document.getElementById("btn_retry");     
-const btm_mute = document.getElementById("btn_mute");     
+const btn_retry = document.getElementById("btn_retry");     
+const btn_mute = document.getElementById("btn_mute");     
 
 const version_tag = document.getElementById("version_tag");
 
@@ -53,13 +53,12 @@ get_connected_status();
 dot1Click();
 //CHECKS FOR MESSAGES
 get_msg();
+var darkness = true;
 
-
-function get_settings() {
+function get_settings() { 
     invoke('get_settings').then((message) => {
         var muted = false;
-        var darkness = false;
-
+        
         if (message == "m0d0") {
             muted = false;
             darkness = false;
@@ -73,14 +72,33 @@ function get_settings() {
             muted = false;
             darkness = true;
         }
-
+        
         if (muted == true) {
-            btm_mute.innerHTML = "unmute";
+            btn_mute.innerHTML = "unmute";
         } else {
-            btm_mute.innerHTML = "mute";            
+            btn_mute.innerHTML = "mute";            
         }
-
-        //btm_mute.innerHTML = "mute";
+        
+        if (menu = 1) {
+            if (darkness) {
+                dot1.src = "/svg/dot_filled.svg";
+                dot2.src = "/svg/dot.svg";
+            } else {
+                dot1.src = "/svg/dot_filled_black.svg";
+                dot2.src = "/svg/dot_black.svg";
+            }
+        } 
+        
+        else if (menu == 2) {
+            if (darkness) {
+                dot1.src = "/svg/dot.svg";
+                dot2.src = "/svg/dot_filled.svg";
+            } else {
+                dot1.src = "/svg/dot_black.svg";
+                dot2.src = "/svg/dot_filled_black.svg";
+            }
+        }
+        //btn_mute.innerHTML = "mute";
         if (darkness == true) {
             css_root.setProperty('--background-color', '#000000');
             css_root.setProperty('--color', '#ffffff');
@@ -157,7 +175,7 @@ function get_settings() {
             }
 
             logo.src = "/svg/logo.svg";
-            
+            screw.src = "/svg/screw.svg";
         } else { //darkness false
             css_root.setProperty('--background-color', '#ffffff');
             css_root.setProperty('--color', '#000000');
@@ -234,6 +252,7 @@ function get_settings() {
             }
 
             logo.src = "/svg/logo_black.svg";
+            screw.src = "/svg/screw_black.svg";
         }
     });
 }
@@ -297,7 +316,7 @@ function get_installed_apps() {
 function get_connected_status(){
     invoke('is_disconnected').then((state) => {
         if (state == true) {
-            f_info.innerHTML = "";
+            footer_info.innerHTML = "";
 
             get_settings();
 
@@ -309,7 +328,7 @@ function get_connected_status(){
             }
 
         } else {
-            f_info.innerHTML = "Disconnected.";
+            footer_info.innerHTML = "Disconnected.";
 
             get_settings()
 
@@ -359,13 +378,13 @@ function get_msg() {
                 invoke('get_msg_text').then((text) => {
                     msg_text = text;
         
-                    err_o.classList.add("overlay_visible");
-                    err_w.classList.add("error_window_visible");
+                    error_overlay.classList.add("overlay_visible");
+                    error_window.classList.add("error_window_visible");
         
-                    err_e1.innerHTML = msg_header;
-                    err_e2.innerHTML = "";
-                    err_e3.innerHTML = msg_text;
-                    err_e4.innerHTML = "" ;
+                    e1.innerHTML = msg_header;
+                    e2.innerHTML = "";
+                    e3.innerHTML = msg_text;
+                    e4.innerHTML = "" ;
                 });
             });
         }
@@ -380,16 +399,22 @@ function dot1Click() {
     dbtn_n.style.visibility = "visible";
     dbtn_l.style.visibility = "hidden";
 
-    kkt.classList.remove("inner_container");
-    void kkt.offsetWidth;
-    kkt.classList.add("inner_container2");
+    kokot.classList.remove("inner_container");
+    void kokot.offsetWidth;
+    kokot.classList.add("inner_container2");
 
     game_title.innerHTML = 'NETR';
     game_text1.innerHTML = "Grayscale simple horror game, where you are exploring lost kingdom of king, which tried to create new relligion there.";
     game_text2.innerHTML = "You are farmer from village, and you are trying to explore that kingdom,but you will meet bunch of enemies, which will try to stop your journey.";
     game_text3.innerHTML = "";
-    dot1.src = "/svg/dot_filled.svg";
-    dot2.src = "/svg/dot.svg";
+
+    if (darkness) {
+        dot1.src = "/svg/dot_filled.svg";
+        dot2.src = "/svg/dot.svg";
+    } else {
+        dot1.src = "/svg/dot_filled_black.svg";
+        dot2.src = "/svg/dot_black.svg";
+    }
 
     ubtn_l.style.visibility = "hidden";
 
@@ -417,16 +442,22 @@ function dot2Click() {
     dbtn_n.style.visibility = "hidden";
     dbtn_l.style.visibility = "visible";
 
-    kkt.classList.remove("inner_container2");
-    void kkt.offsetWidth;
-    kkt.classList.add("inner_container");
+    kokot.classList.remove("inner_container2");
+    void kokot.offsetWidth;
+    kokot.classList.add("inner_container");
 
     game_title.innerHTML = "litl cow";
     game_text1.innerHTML = "Platformer with litl cow and litl friends, whole game is your enemy and tries to opset you. Inspired by Cat Mario.";
     game_text2.innerHTML = "The version 2 is unfinished";
     game_text3.innerHTML = "With version 1 I am finished with.";
-    dot1.src = "/svg/dot.svg";
-    dot2.src = "/svg/dot_filled.svg";
+    
+    if (darkness) {
+        dot1.src = "/svg/dot.svg";
+        dot2.src = "/svg/dot_filled.svg";
+    } else {
+        dot1.src = "/svg/dot_black.svg";
+        dot2.src = "/svg/dot_filled_black.svg";
+    }
 
     ubtn_n.style.visibility = "hidden";
 
@@ -447,14 +478,14 @@ function dot2Click() {
 
 
 function screwClick() {
-    kkt2.classList.add("overlay_visible");
-    kkt3.classList.add("screw_window_visible");
+    kokot2.classList.add("overlay_visible");
+    kokot3.classList.add("screw_window_visible");
 }
 
 
 function screwCloseClick() {
-    kkt2.classList.remove("overlay_visible");
-    kkt3.classList.remove("screw_window_visible");
+    kokot2.classList.remove("overlay_visible");
+    kokot3.classList.remove("screw_window_visible");
 }
 
 
@@ -489,7 +520,7 @@ function downloadNetr() {
                 }
             });
         }, setTimeout(() => {
-            retry_btn.innerHTML = "retry"
+            btn_retry.innerHTML = "retry"
         }, 5000));
     }
 }
@@ -529,7 +560,7 @@ function downloadLitlcow() {
                 }
             });
         }, setTimeout(() => {
-            retry_btn.innerHTML = "retry"
+            btn_retry.innerHTML = "retry"
         }, 5000));
     }
 }
@@ -558,14 +589,14 @@ function installLitlCow() {
 
 
 function retry() {
-    retry_btn.innerHTML = "...";
+    btn_retry.innerHTML = "...";
     invoke('retry').then(() => {
         get_connected_status();
         get_installed_apps();
         get_settings();
         dot1Click();
     }, setTimeout(() => {
-        retry_btn.innerHTML = "retry"
+        btn_retry.innerHTML = "retry"
     }, 5000));
 }
 
@@ -574,18 +605,18 @@ function deleteNetr(update) {
     if (installing_netr == false && installing_lcow == false) {
         invoke('delete_init', { gameName: 'netr' }).then((message) => {
             if (message == "mak") {
-                err_o.classList.add("overlay_visible");
-                err_w.classList.add("error_window_visible");
+                error_overlay.classList.add("overlay_visible");
+                error_window.classList.add("error_window_visible");
                 if (update == true) {
-                    err_e1.innerHTML = "Delete your game in order to update."
-                    err_e2.innerHTML = "Go to: > HOME folder > Applications"
-                    err_e3.innerHTML = ""
-                    err_e4.innerHTML = "Because agent has no permissions to delete your game on macOS. You need to delete it manualy."
+                    e1.innerHTML = "Delete your game in order to update."
+                    e2.innerHTML = "Go to: > HOME folder > Applications"
+                    e3.innerHTML = ""
+                    e4.innerHTML = "Because agent has no permissions to delete your game on macOS. You need to delete it manualy."
                 } else {
-                    err_e1.innerHTML = "No permission to delete your game."
-                    err_e2.innerHTML = "Go to: > HOME folder > Applications"
-                    err_e3.innerHTML = ""
-                    err_e4.innerHTML = "Because agent has no permissions to delete your game on macOS. You need to delete it manualy."
+                    e1.innerHTML = "No permission to delete your game."
+                    e2.innerHTML = "Go to: > HOME folder > Applications"
+                    e3.innerHTML = ""
+                    e4.innerHTML = "Because agent has no permissions to delete your game on macOS. You need to delete it manualy."
                 }
             }
             get_installed_apps();
@@ -595,8 +626,8 @@ function deleteNetr(update) {
 
 
 function errClose() {
-    err_o.classList.remove("overlay_visible");
-    err_w.classList.remove("error_window_visible");
+    error_overlay.classList.remove("overlay_visible");
+    error_window.classList.remove("error_window_visible");
 }
 
 
@@ -604,18 +635,18 @@ function deleteLitlcow(update) {
     if (installing_netr == false && installing_lcow == false) { 
         invoke('delete_init', { gameName: 'litlcow' }).then((message) => {
             if (message == "mak") {
-                err_o.classList.add("overlay_visible");
-                err_w.classList.add("error_window_visible");
+                error_overlay.classList.add("overlay_visible");
+                error_window.classList.add("error_window_visible");
                 if (update == true) {
-                    err_e1.innerHTML = "Delete your game in order to update."
-                    err_e2.innerHTML = "Go to: > HOME folder > Applications"
-                    err_e3.innerHTML = ""
-                    err_e4.innerHTML = "Because agent has no permissions to delete your game on macOS. You need to delete it manualy."
+                    e1.innerHTML = "Delete your game in order to update."
+                    e2.innerHTML = "Go to: > HOME folder > Applications"
+                    e3.innerHTML = ""
+                    e4.innerHTML = "Because agent has no permissions to delete your game on macOS. You need to delete it manualy."
                 } else {
-                    err_e1.innerHTML = "No permission to delete your game."
-                    err_e2.innerHTML = "Go to: > HOME folder > Applications"
-                    err_e3.innerHTML = ""
-                    err_e4.innerHTML = "Because agent has no permissions to delete your game on macOS. You need to delete it manualy."
+                    e1.innerHTML = "No permission to delete your game."
+                    e2.innerHTML = "Go to: > HOME folder > Applications"
+                    e3.innerHTML = ""
+                    e4.innerHTML = "Because agent has no permissions to delete your game on macOS. You need to delete it manualy."
                 }
             }
             get_installed_apps();
@@ -646,7 +677,7 @@ function muteSwitch() {
 }
 
 function relaunchIt() {
-    relaunchAgent();
+    invoke('system_restart');
 }
 
 async function relaunchAgent() {
