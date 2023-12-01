@@ -459,16 +459,18 @@ function screwCloseClick() {
 
 
 function updateNetr() {
-    deleteNetr(true).then(() => {
+    if (installing_lcow == false && installing_netr == false) {
+        deleteNetr(true);
         downloadNetr();
-    });
+    }
 }
 
 
 function updateLitlcow() {
-    deleteLitlcow(true).then(() => {
+    if (installing_lcow == false && installing_netr == false) {
+        deleteLitlcow(true)
         downloadLitlcow();
-    });
+    }
 }
 
 
