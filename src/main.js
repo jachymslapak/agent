@@ -79,7 +79,7 @@ function get_settings() {
             btn_mute.innerHTML = "mute";            
         }
         
-        if (menu = 1) {
+        if (menu == 1) {
             if (darkness) {
                 dot1.src = "/svg/dot_filled.svg";
                 dot2.src = "/svg/dot.svg";
@@ -508,17 +508,18 @@ function updateLitlcow() {
 function downloadNetr() {
     if (installing_lcow == false && installing_netr == false) {
         installing_netr = true;
+        
         get_settings();
 
         dbtn_n.innerHTML = "...";
 
         invoke('retry').then(() => {
-            get_connected_status();
             invoke('is_disconnected').then((state) => {
                 if (state == true) {
                     installNetr();
                 }
             });
+
         }, setTimeout(() => {
             btn_retry.innerHTML = "retry"
         }, 5000));
@@ -532,33 +533,38 @@ function installNetr() {
     var interval = setInterval(function(){invoke('get_progress').then((message) => {
         if (message == "d") {
             clearInterval(interval);
-            fEI = setInterval(get_installed_apps, 10000);
+            fEI = setInterval(get_installed_apps, 5000);
             installing_netr = false;
             get_settings();
-            get_installed_apps()
-            invoke('get_updates').then(() => {displayInstalledNetrVersion();});
+
+            invoke('get_updates').then(() => {
+                get_installed_apps();
+                displayInstalledNetrVersion();
+            });
+            
         } else {
             dbtn_n.innerHTML = message
         }
     }
-    )},100);
+    )}, 100);
 }
 
 
 function downloadLitlcow() {
     if (installing_lcow == false && installing_netr == false) {
         installing_lcow = true;
+        
         get_settings();
 
         dbtn_n.innerHTML = "...";
         
         invoke('retry').then(() => {
-            get_connected_status();
             invoke('is_disconnected').then((state) => {
                 if (state == true) {
                     installLitlCow();
                 }
             });
+
         }, setTimeout(() => {
             btn_retry.innerHTML = "retry"
         }, 5000));
@@ -575,10 +581,15 @@ function installLitlCow() {
         if (message == "d") {
             get_installed_apps();            
             clearInterval(interval);
-            fEI = setInterval(get_installed_apps, 10000);
+            fEI = setInterval(get_installed_apps, 5000);
             installing_lcow = false;
             get_settings();
-            invoke('get_updates').then(() => {displayInstalledLitlcowVersion();});
+
+            invoke('get_updates').then(() => {
+                get_installed_apps();
+                displayInstalledLitlcowVersion();
+            });
+
         } else {
             dbtn_l.innerHTML = message
         }
@@ -594,7 +605,6 @@ function retry() {
         get_connected_status();
         get_installed_apps();
         get_settings();
-        dot1Click();
     }, setTimeout(() => {
         btn_retry.innerHTML = "retry"
     }, 5000));
@@ -620,6 +630,7 @@ function deleteNetr(update) {
                 }
             }
             get_installed_apps();
+            displayInstalledNetrVersion();
         });
     }
 }
@@ -650,6 +661,7 @@ function deleteLitlcow(update) {
                 }
             }
             get_installed_apps();
+            displayInstalledLitlcowVersion();
         });
     }
 }

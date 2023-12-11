@@ -1260,6 +1260,10 @@ async fn delete(game_title: String) -> Result<()> {
         std::fs::remove_file(netr_path_linux)?;
         reset_netr_version().expect("error with reseting version");
 
+        let username = whoami::username();
+        let desktop_entry_path = format!("/home/{}/.local/share/applications/netr.desktop", username);
+        std::fs::remove_file(desktop_entry_path)?;
+
       } else if os_type == "windows" {
         let netr_path_win = match dirs::desktop_dir() {
           Some(var) => var.join("netr.exe"),
@@ -1279,9 +1283,11 @@ async fn delete(game_title: String) -> Result<()> {
           None => panic!("failed to get home folder"),
         };
         std::fs::remove_file(litlcow_path_linux)?;
-        println!("file removed");
         reset_lcow_version().expect("error with reseting version");
-        println!("file reseted");
+
+        let username = whoami::username();
+        let desktop_entry_path = format!("/home/{}/.local/share/applications/litlcow.desktop", username);
+        std::fs::remove_file(desktop_entry_path)?;
 
       } else if os_type == "windows" {
         let litlcow_path_win = match dirs::desktop_dir() {
