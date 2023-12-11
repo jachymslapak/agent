@@ -33,6 +33,7 @@ static mut DARKNESS: bool = true;
 static mut UPDATE_NETR: bool = false;
 static mut UPDATE_LITLCOW: bool = true;
 
+
 //INITIALIZATION SCRIPTS
 #[tauri::command]
 async fn get_updates() -> String {
@@ -1142,8 +1143,14 @@ async fn install_file(path_final: &PathBuf, game_title: &str) -> Result<()> {
         Some(var) => var.join("litlcow.x86_64"),
         None => panic!("failed to get home folder"),
       };
+
       let linux_folder = match dirs::executable_dir() {
         Some(var) => var,
+        None => panic!("failed to get home folder"),
+      };
+      
+      let exec = match dirs::executable_dir() {
+        Some(var) => var.join("litlcow.x86_64"),
         None => panic!("failed to get home folder"),
       };
 
@@ -1151,6 +1158,25 @@ async fn install_file(path_final: &PathBuf, game_title: &str) -> Result<()> {
 
       std::fs::create_dir_all(linux_folder)?;
       std::fs::copy(path_final, litlcow_path_linux)?;
+
+      let username = whoami::username();
+      let desktop_entry_path = format!("/home/{}/.local/share/applications/litlcow.desktop", username);
+      println!("{}", desktop_entry_path);
+
+      let mut file = fs::File::create(desktop_entry_path)?;
+      let buf = format!("[Desktop Entry]
+      Version=1.0
+      Name=litl cow
+      GenericName=litlcow
+      Exec={}
+      Terminal=false
+      Type=Application", exec.display());
+      file.write_all(buf.as_bytes()).expect("error with writing file");
+
+      let output = Command::new("chmod").arg("+x").arg(exec).output().expect("failed to execute process");
+      let hello = output.stdout;
+
+      println!("{:?}", hello)
 
     } else {
       panic!("usupported OS");
@@ -1306,15 +1332,6 @@ async fn retry() {
 
 #[tauri::command]
 fn get_progress() -> String {
-  // codes
-  // -1 initiaizing
-  // -2 extracting
-  // -3 installing
-  // -4 deleting
-  // -5 mac delete 
-  
-  // -10 done
-
   let message: String;
 
   unsafe {
@@ -1477,6 +1494,7 @@ fn system_exit() {
 fn system_restart(app_handle: tauri::AppHandle) {
   restart(&app_handle.env());
 }
+
 
 fn main() { 
   println!("{:#?}", dirs::home_dir());
