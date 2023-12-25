@@ -303,24 +303,11 @@ h2 {
 }
 
 #btn_retry {
-  pointer-events: all;
-  position: absolute;
-  top: 93%;
-  width: 50px;
-  height: 20px;
   margin: auto;
   left: 75px;
   right: 0;
-  top: 90%;
+  top: 70%;
   bottom: 0;
-  text-align: center;
-  cursor: pointer;
-  animation: none;
-  padding-top: 2px;
-  padding-bottom: 3px;
-  padding-left: 5px;
-  padding-right: 5px;
-  visibility: visible;
 }
 
 .inner_container {

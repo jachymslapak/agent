@@ -688,9 +688,11 @@ function muteSwitch() {
     });
 }
 
+
 function relaunchIt() {
     invoke('system_restart');
 }
+
 
 async function relaunchAgent() {
     await relaunch();
