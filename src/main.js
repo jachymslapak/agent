@@ -50,7 +50,7 @@ var fEI = setInterval(get_installed_apps, 10000);
 //CHECK ONLINE STATUS
 get_connected_status();
 //SELECTS MAIN MENU
-dot1Click();
+dot2Click();
 //CHECKS FOR MESSAGES
 get_msg();
 var darkness = true;
@@ -447,7 +447,7 @@ function dot2Click() {
     kokot.classList.add("inner_container");
 
     game_title.innerHTML = "litl cow";
-    game_text1.innerHTML = "Platformer with litl cow and litl friends, whole game is your enemy and tries to opset you. Inspired by Cat Mario.";
+    game_text1.innerHTML = "Platformer with litl cow and litl friends, whole game is your enemy and tries to upset you. Inspired by Cat Mario.";
     game_text2.innerHTML = "The version 2 is unfinished";
     game_text3.innerHTML = "With version 1 I am finished with.";
     
