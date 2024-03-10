@@ -404,9 +404,9 @@ function dot1Click() {
     kokot.classList.add("inner_container2");
 
     game_title.innerHTML = 'NETR';
-    game_text1.innerHTML = "Grayscale simple horror game, where you are exploring lost kingdom of king, which tried to create new relligion there.";
-    game_text2.innerHTML = "You are farmer from village, and you are trying to explore that kingdom,but you will meet bunch of enemies, which will try to stop your journey.";
-    game_text3.innerHTML = "";
+    game_text1.innerHTML = "Grayscale simple horror game. It was intended to be religious horror game.";
+    game_text2.innerHTML = "Not finished asset pack, cause I lack discipline";
+    game_text3.innerHTML = "ABANDONED";
 
     if (darkness) {
         dot1.src = "/svg/dot_filled.svg";
@@ -446,10 +446,10 @@ function dot2Click() {
     void kokot.offsetWidth;
     kokot.classList.add("inner_container");
 
-    game_title.innerHTML = "litl cow";
-    game_text1.innerHTML = "Platformer with litl cow and litl friends, whole game is your enemy and tries to upset you. Inspired by Cat Mario.";
-    game_text2.innerHTML = "The version 2 is unfinished";
-    game_text3.innerHTML = "With version 1 I am finished with.";
+    game_title.innerHTML = "LitlCow";
+    game_text1.innerHTML = "Short platformer with litl cow and litl friend, whole game is your enemy and tries to upset you.";
+    game_text2.innerHTML = "Gepard and litl dog included.";
+    game_text3.innerHTML = "Inspired by Cat Mario.";
     
     if (darkness) {
         dot1.src = "/svg/dot.svg";
