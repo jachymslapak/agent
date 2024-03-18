@@ -405,8 +405,8 @@ function dot1Click() {
 
     game_title.innerHTML = 'NETR';
     game_text1.innerHTML = "Grayscale simple horror game. It was intended to be religious horror game.";
-    game_text2.innerHTML = "Not finished asset pack, cause I lack discipline";
-    game_text3.innerHTML = "ABANDONED";
+    game_text2.innerHTML = "> Not finished < due to lack of time";
+    game_text3.innerHTML = "";
 
     if (darkness) {
         dot1.src = "/svg/dot_filled.svg";
