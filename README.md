@@ -23,11 +23,7 @@ Now build the app with:
 `npm run tauri dev`
 
 # please note:
-This is a really messy app, good luck with understanding that. 
-It is one of my first projects with Rust and JavaScript, please don't judge my development skills based on this if you wanna hire me.
-
-If you are person that is interested in some random app.
-Enjoy :)
+This is a really messy app, I am just learning with rust right now. You can tell me if there is something wrong.
 
 ## IDE setup
 - [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
